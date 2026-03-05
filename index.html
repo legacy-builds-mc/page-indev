@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MC Legacy for Windows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #1a1a1a;
+      --surface: #222222;
+      --border:  #333333;
+      --text:    #d4d4d4;
+      --muted:   #888888;
+      --green:   #4a9a5c;
+      --blue:    #4a90d9;
+      --radius:  8px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: .02em;
+    }
+
+    .nav-links { display: flex; gap: 24px; }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color .15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      max-width: 680px;
+      margin: 80px auto 0;
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 600;
+      color: #e8e8e8;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: inherit;
+      border: 1px solid transparent;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+
+    .btn-primary { background: var(--green); color: #fff; border-color: var(--green); }
+    .btn-primary:hover { background: #3d8a4e; }
+    .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn-ghost:hover { background: var(--surface); }
+
+    .divider {
+      max-width: 680px;
+      margin: 60px auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .features {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+
+    .feature-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e0e0e0;
+      margin-bottom: 4px;
+    }
+
+    .feature p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .install {
+      max-width: 680px;
+      margin: 48px auto 0;
+      padding: 0 40px;
+    }
+
+    .install-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .steps { display: flex; flex-direction: column; gap: 0; }
+
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      padding: 11px 18px;
+      font-size: 13px;
+      color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .step:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+    .step:last-child  { border-bottom: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius); }
+
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .step a { color: var(--blue); text-decoration: none; }
+    .step a:hover { text-decoration: underline; }
+
+    .stats {
+      max-width: 680px;
+      margin: 48px auto 0;
+      padding: 0 40px;
+    }
+
+    .stat-item { display: flex; flex-direction: column; gap: 3px; }
+
+    .stat-num {
+      font-size: 22px;
+      font-weight: 600;
+      color: #e0e0e0;
+      letter-spacing: -.02em;
+    }
+
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    footer {
+      max-width: 680px;
+      margin: 80px auto 0;
+      padding: 24px 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    footer .blue-link { color: var(--blue); }
+    footer .blue-link:hover { text-decoration: underline; color: var(--blue); }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero     { animation: fade-up .4s ease both; }
+    .features { animation: fade-up .4s .1s ease both; }
+    .install  { animation: fade-up .4s .18s ease both; }
+    .stats    { animation: fade-up .4s .24s ease both; }
+
+    @media (max-width: 520px) {
+      .features { grid-template-columns: 1fr; }
+      .hero h1  { font-size: 30px; }
+      nav, .hero, .features, .install, .stats, footer { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">⛏ mc-legacy</span>
+  <div class="nav-links">
+    <a id="nav-github" href="#">GitHub</a>
+    <a id="nav-contributors" href="#">Contributors</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Open source · Windows 10 / 11</p>
+  <h1>MC Legacy<br>for Windows</h1>
+  <p>Compiled builds of Minecraft Legacy for Windows from the MinecraftConsoles repository by smartcmd, with multiplayer support and full Windows 10/11 compatibility.</p>
+  <div class="hero-actions">
+    <a id="btn-download" class="btn btn-primary" href="#">Download</a>
+    <a id="btn-github" class="btn btn-ghost" href="#">View on GitHub</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="features">
+  <div class="feature">
+    <div class="feature-title">Multiplayer</div>
+    <p>Compatible with LAN multiplayer. You can also play with friends online using RadminVPN.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-title">Excellent performance</div>
+    <p>Highly optimized — runs smoothly even on low-end hardware.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-title">Original source code</div>
+    <p>Compiled from the original source code with patches and tweaks applied.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-title">Compiled daily</div>
+    <p>Fresh builds generated every day by the creator of this page.</p>
+  </div>
+</div>
+
+<div class="install">
+  <p class="install-label">Installation</p>
+  <div class="steps">
+    <div class="step"><span class="step-num">1.</span> Download the .zip and extract it wherever you want.</div>
+    <div class="step"><span class="step-num">2.</span> Open the game.</div>
+    <div class="step"><span class="step-num">3.</span> If you want to play multiplayer, click <a id="link-here" href="#">here</a> to set up the game.</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat-item">
+    <span class="stat-num" id="build-date">—</span>
+    <span class="stat-label">Compiled on</span>
+  </div>
+</div>
+
+<footer>
+  <span>The original repository is from the GitHub user <a class="blue-link" href="https://github.com/smartcmd" target="_blank">smartcmd</a>.</span>
+  <span><a href="#">Issues</a> · <a id="footer-contributors" href="#">Contributors</a></span>
+</footer>
+
+<script>
+  function parseData(text) {
+    const map = {};
+    text.split('\n').forEach(line => {
+      const i = line.indexOf(':');
+      if (i === -1) return;
+      const key = line.slice(0, i).trim().toLowerCase();
+      const val = line.slice(i + 1).trim();
+      map[key] = val;
+    });
+    return map;
+  }
+
+  async function loadData() {
+    // build_date.txt
+    try {
+      const r = await fetch('build_date.txt');
+      if (r.ok) {
+        const t = await r.text();
+        document.getElementById('build-date').textContent = t.trim();
+      }
+    } catch(e) {}
+
+    // data.txt
+    try {
+      const r = await fetch('data.txt');
+      if (!r.ok) return;
+      const data = parseData(await r.text());
+
+      const repo    = data['github repo']    || '#';
+      const dl      = data['download']       || '#';
+      const contrib = data['contributors']   || '#';
+      const here    = data['here button']    || '#';
+
+      document.getElementById('btn-download').href       = dl;
+      document.getElementById('btn-github').href         = repo;
+      document.getElementById('nav-github').href         = repo;
+      document.getElementById('nav-contributors').href   = contrib;
+      document.getElementById('footer-contributors').href = contrib;
+      document.getElementById('link-here').href          = here;
+    } catch(e) {}
+  }
+
+  loadData();
+</script>
+</body>
+</html>

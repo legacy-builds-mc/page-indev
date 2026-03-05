@@ -1,4 +1,5 @@
 github repo: https://github.com/smartcmd/MinecraftConsoles
-download: (aqui lo voy a cambiar yo)
+download: 
 contributors: https://github.com/smartcmd/MinecraftConsoles/graphs/contributors
 here button: https://github.com/smartcmd/MinecraftConsoles?tab=readme-ov-file#multiplayer
+issues: https://github.com/smartcmd/MinecraftConsoles/issues

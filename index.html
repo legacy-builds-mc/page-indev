@@ -18,20 +18,29 @@
       --green:   #4a9a5c;
       --blue:    #4a90d9;
       --radius:  8px;
+      --nav-h:   52px;
+      --pad:     clamp(20px, 5vw, 64px);
+    }
+
+    html, body {
+      height: 100%;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
       line-height: 1.6;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* ── NAV ── */
     nav {
+      flex-shrink: 0;
       border-bottom: 1px solid var(--border);
-      padding: 0 40px;
-      height: 52px;
+      padding: 0 var(--pad);
+      height: var(--nav-h);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -39,75 +48,98 @@
 
     .nav-logo {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+      font-size: clamp(11px, 1.2vw, 14px);
       font-weight: 600;
       color: var(--text);
       letter-spacing: .02em;
     }
 
-    .nav-links { display: flex; gap: 24px; }
+    .nav-links { display: flex; gap: clamp(16px, 2.5vw, 28px); }
 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: clamp(11px, 1.1vw, 13px);
       transition: color .15s;
     }
 
     .nav-links a:hover { color: var(--text); }
 
+    /* ── MAIN WRAPPER ── */
+    /* fills remaining height, centers content vertically */
+    .page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 0 var(--pad);
+    }
+
+    /* ── INNER: two-column on wide, single-column on narrow ── */
+    .inner {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      align-items: center;
+      gap: clamp(24px, 4vw, 60px);
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: clamp(32px, 5vh, 72px) 0;
+    }
+
+    /* ── LEFT: hero ── */
     .hero {
-      max-width: 680px;
-      margin: 80px auto 0;
-      padding: 0 40px;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
     .hero-eyebrow {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: clamp(10px, 0.9vw, 11px);
       color: var(--muted);
       letter-spacing: .12em;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: clamp(12px, 1.5vh, 20px);
     }
 
     .hero h1 {
-      font-size: 42px;
+      font-size: clamp(28px, 4.5vw, 58px);
       font-weight: 600;
       color: #e8e8e8;
       letter-spacing: -.02em;
-      line-height: 1.15;
-      margin-bottom: 18px;
+      line-height: 1.12;
+      margin-bottom: clamp(12px, 1.8vh, 20px);
     }
 
-    .hero p {
-      font-size: 15px;
+    .hero-desc {
+      font-size: clamp(13px, 1.1vw, 15px);
       color: var(--muted);
-      max-width: 480px;
-      margin: 0 auto 32px;
+      max-width: 46ch;
+      margin-bottom: clamp(20px, 3vh, 36px);
+      line-height: 1.65;
     }
 
     .hero-actions {
       display: flex;
       gap: 10px;
-      justify-content: center;
       flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 9px 20px;
+      padding: clamp(7px, 0.9vh, 10px) clamp(14px, 1.5vw, 22px);
       border-radius: var(--radius);
-      font-size: 13px;
+      font-size: clamp(12px, 1vw, 13px);
       font-weight: 500;
       cursor: pointer;
       text-decoration: none;
       font-family: inherit;
       border: 1px solid transparent;
-      transition: background .15s, border-color .15s, color .15s;
+      transition: background .15s, border-color .15s;
     }
 
     .btn-primary { background: var(--green); color: #fff; border-color: var(--green); }
@@ -115,65 +147,58 @@
     .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
     .btn-ghost:hover { background: var(--surface); }
 
-    .divider {
-      max-width: 680px;
-      margin: 60px auto;
-      border: none;
-      border-top: 1px solid var(--border);
+    /* ── RIGHT: all the content ── */
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 3vh, 36px);
     }
 
+    /* features grid */
     .features {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 40px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: clamp(8px, 1vw, 12px);
     }
 
     .feature {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 18px 20px;
+      padding: clamp(12px, 1.5vh, 20px) clamp(14px, 1.5vw, 20px);
     }
 
     .feature-title {
-      font-size: 13px;
+      font-size: clamp(11px, 0.95vw, 13px);
       font-weight: 600;
       color: #e0e0e0;
       margin-bottom: 4px;
     }
 
     .feature p {
-      font-size: 12px;
+      font-size: clamp(10px, 0.85vw, 12px);
       color: var(--muted);
       line-height: 1.55;
     }
 
-    .install {
-      max-width: 680px;
-      margin: 48px auto 0;
-      padding: 0 40px;
-    }
-
+    /* install */
     .install-label {
-      font-size: 11px;
+      font-size: clamp(10px, 0.85vw, 11px);
       color: var(--muted);
       letter-spacing: .08em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-family: 'JetBrains Mono', monospace;
     }
 
-    .steps { display: flex; flex-direction: column; gap: 0; }
+    .steps { display: flex; flex-direction: column; }
 
     .step {
       background: var(--surface);
       border: 1px solid var(--border);
       border-bottom: none;
-      padding: 11px 18px;
-      font-size: 13px;
+      padding: clamp(9px, 1vh, 12px) clamp(14px, 1.5vw, 18px);
+      font-size: clamp(11px, 0.9vw, 13px);
       color: var(--text);
       display: flex;
       align-items: baseline;
@@ -185,7 +210,7 @@
 
     .step-num {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: clamp(10px, 0.8vw, 11px);
       color: var(--muted);
       flex-shrink: 0;
     }
@@ -193,56 +218,61 @@
     .step a { color: var(--blue); text-decoration: none; }
     .step a:hover { text-decoration: underline; }
 
-    .stats {
-      max-width: 680px;
-      margin: 48px auto 0;
-      padding: 0 40px;
-    }
-
-    .stat-item { display: flex; flex-direction: column; gap: 3px; }
+    /* compiled on */
+    .stat-item { display: flex; flex-direction: column; gap: 2px; }
 
     .stat-num {
-      font-size: 22px;
+      font-size: clamp(16px, 1.8vw, 22px);
       font-weight: 600;
       color: #e0e0e0;
       letter-spacing: -.02em;
     }
 
-    .stat-label { font-size: 12px; color: var(--muted); }
+    .stat-label { font-size: clamp(10px, 0.85vw, 12px); color: var(--muted); }
 
+    /* ── FOOTER ── */
     footer {
-      max-width: 680px;
-      margin: 80px auto 0;
-      padding: 24px 40px;
+      flex-shrink: 0;
       border-top: 1px solid var(--border);
+      padding: clamp(14px, 2vh, 22px) var(--pad);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: clamp(10px, 0.85vw, 12px);
       color: var(--muted);
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--text); }
-    footer .blue-link { color: var(--blue); }
-    footer .blue-link:hover { text-decoration: underline; color: var(--blue); }
+    .blue-link { color: var(--blue) !important; }
+    .blue-link:hover { text-decoration: underline !important; }
 
+    /* ── ANIMATIONS ── */
     @keyframes fade-up {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     .hero     { animation: fade-up .4s ease both; }
-    .features { animation: fade-up .4s .1s ease both; }
-    .install  { animation: fade-up .4s .18s ease both; }
-    .stats    { animation: fade-up .4s .24s ease both; }
+    .right    { animation: fade-up .4s .1s ease both; }
 
-    @media (max-width: 520px) {
+    /* ── RESPONSIVE: narrow screens → single column ── */
+    @media (max-width: 860px) {
+      .inner {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .hero { text-align: center; }
+      .hero-desc { max-width: 100%; margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
       .features { grid-template-columns: 1fr; }
-      .hero h1  { font-size: 30px; }
-      nav, .hero, .features, .install, .stats, footer { padding-left: 20px; padding-right: 20px; }
+      .hero h1  { font-size: 26px; }
     }
   </style>
 </head>
@@ -256,56 +286,63 @@
   </div>
 </nav>
 
-<div class="hero">
-  <p class="hero-eyebrow">Open source · Windows 10 / 11</p>
-  <h1>MC Legacy<br>for Windows</h1>
-  <p>Compiled builds of Minecraft Legacy for Windows from the MinecraftConsoles repository by smartcmd, with multiplayer support and full Windows 10/11 compatibility.</p>
-  <div class="hero-actions">
-    <a id="btn-download" class="btn btn-primary" href="#">Download</a>
-    <a id="btn-github" class="btn btn-ghost" href="#">View on GitHub</a>
-  </div>
-</div>
+<div class="page">
+  <div class="inner">
 
-<hr class="divider">
+    <!-- LEFT -->
+    <div class="hero">
+      <p class="hero-eyebrow">Open source · Windows 10 / 11</p>
+      <h1>MC Legacy<br>for Windows</h1>
+      <p class="hero-desc">Compiled builds of Minecraft Legacy for Windows from the MinecraftConsoles repository by smartcmd, with multiplayer support and full Windows 10/11 compatibility.</p>
+      <div class="hero-actions">
+        <a id="btn-download" class="btn btn-primary" href="#">Download</a>
+        <a id="btn-github" class="btn btn-ghost" href="#">View on GitHub</a>
+      </div>
+    </div>
 
-<div class="features">
-  <div class="feature">
-    <div class="feature-title">Multiplayer</div>
-    <p>Compatible with LAN multiplayer. You can also play with friends online using RadminVPN.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-title">Excellent performance</div>
-    <p>Highly optimized — runs smoothly even on low-end hardware.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-title">Original source code</div>
-    <p>Compiled from the original source code with patches and tweaks applied.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-title">Compiled daily</div>
-    <p>Fresh builds generated every day by the creator of this page.</p>
-  </div>
-</div>
+    <!-- RIGHT -->
+    <div class="right">
 
-<div class="install">
-  <p class="install-label">Installation</p>
-  <div class="steps">
-    <div class="step"><span class="step-num">1.</span> Download the .zip and extract it wherever you want.</div>
-    <div class="step"><span class="step-num">2.</span> Open the game.</div>
-    <div class="step"><span class="step-num">3.</span> If you want to play multiplayer, click <a id="link-here" href="#">here</a> to set up the game.</div>
-  </div>
-</div>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-title">Multiplayer</div>
+          <p>Compatible with LAN multiplayer. You can also play with friends online using RadminVPN.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Excellent performance</div>
+          <p>Highly optimized — runs smoothly even on low-end hardware.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Original source code</div>
+          <p>Compiled from the original source code with patches and tweaks applied.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-title">Compiled daily</div>
+          <p>Fresh builds generated every day by the creator of this page.</p>
+        </div>
+      </div>
 
-<div class="stats">
-  <div class="stat-item">
-    <span class="stat-num" id="build-date">—</span>
-    <span class="stat-label">Compiled on</span>
+      <div class="install">
+        <p class="install-label">Installation</p>
+        <div class="steps">
+          <div class="step"><span class="step-num">1.</span> Download the .zip and extract it wherever you want.</div>
+          <div class="step"><span class="step-num">2.</span> Open the game.</div>
+          <div class="step"><span class="step-num">3.</span> If you want to play multiplayer, click <a id="link-here" href="#">here</a> to set up the game.</div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <span class="stat-num" id="build-date">—</span>
+        <span class="stat-label">Compiled on</span>
+      </div>
+
+    </div>
   </div>
 </div>
 
 <footer>
   <span>The original repository is from the GitHub user <a class="blue-link" href="https://github.com/smartcmd" target="_blank">smartcmd</a>.</span>
-  <span><a href="#">Issues</a> · <a id="footer-contributors" href="#">Contributors</a></span>
+  <span><a id="footer-issues" href="#">Issues</a> · <a id="footer-contributors" href="#">Contributors</a></span>
 </footer>
 
 <script>
@@ -315,39 +352,38 @@
       const i = line.indexOf(':');
       if (i === -1) return;
       const key = line.slice(0, i).trim().toLowerCase();
+      // slice from i+1 so full URLs (with ://) are preserved intact
       const val = line.slice(i + 1).trim();
-      map[key] = val;
+      // if value starts with // it's the rest of a URL — prepend https:
+      map[key] = val.startsWith('//') ? 'https:' + val : val;
     });
     return map;
   }
 
   async function loadData() {
-    // build_date.txt
     try {
       const r = await fetch('build_date.txt');
-      if (r.ok) {
-        const t = await r.text();
-        document.getElementById('build-date').textContent = t.trim();
-      }
+      if (r.ok) document.getElementById('build-date').textContent = (await r.text()).trim();
     } catch(e) {}
 
-    // data.txt
     try {
       const r = await fetch('data.txt');
       if (!r.ok) return;
       const data = parseData(await r.text());
 
-      const repo    = data['github repo']    || '#';
-      const dl      = data['download']       || '#';
-      const contrib = data['contributors']   || '#';
-      const here    = data['here button']    || '#';
+      const repo    = data['github repo']  || '#';
+      const dl      = data['download']     || '#';
+      const contrib = data['contributors'] || '#';
+      const here    = data['here button']  || '#';
+      const issues  = data['issues']       || '#';
 
-      document.getElementById('btn-download').href       = dl;
-      document.getElementById('btn-github').href         = repo;
-      document.getElementById('nav-github').href         = repo;
-      document.getElementById('nav-contributors').href   = contrib;
+      document.getElementById('btn-download').href        = dl;
+      document.getElementById('btn-github').href          = repo;
+      document.getElementById('nav-github').href          = repo;
+      document.getElementById('nav-contributors').href    = contrib;
       document.getElementById('footer-contributors').href = contrib;
-      document.getElementById('link-here').href          = here;
+      document.getElementById('link-here').href           = here;
+      document.getElementById('footer-issues').href       = issues;
     } catch(e) {}
   }
 

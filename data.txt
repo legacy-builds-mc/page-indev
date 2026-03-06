@@ -1,5 +1,5 @@
 github repo: https://github.com/smartcmd/MinecraftConsoles
-download: 
+download: https://github.com/legacy-builds-mc/build/actions/runs/22784694869/artifacts/5806729363
 contributors: https://github.com/smartcmd/MinecraftConsoles/graphs/contributors
 here button: https://github.com/smartcmd/MinecraftConsoles?tab=readme-ov-file#multiplayer
 issues: https://github.com/smartcmd/MinecraftConsoles/issues

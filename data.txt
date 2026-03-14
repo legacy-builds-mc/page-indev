@@ -1,5 +1,5 @@
 github repo: https://github.com/smartcmd/MinecraftConsoles
-download: https://github.com/legacy-builds-mc/build/releases/download/nightly/LCEWindows64.zip
+download: https://github.com/smartcmd/MinecraftConsoles/releases/download/nightly/LCEWindows64.zip
 contributors: https://github.com/smartcmd/MinecraftConsoles/graphs/contributors
 here button: https://github.com/smartcmd/MinecraftConsoles?tab=readme-ov-file#multiplayer
 issues: https://github.com/smartcmd/MinecraftConsoles/issues
